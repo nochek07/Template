@@ -1,0 +1,34 @@
+/* Переменные */
+
+/* Плейсхольдеры */
+
+/* ============================ */
+
+.footer {
+  width: 100%;
+  display: block;
+  font-size: $main_font_size;
+  
+  .footer__inner {
+    padding: 20px 0 20px 0;
+    margin: 0 auto;
+    text-align: center;
+    color: $font_color_text;
+
+    @extend %width_block;
+
+    div{
+      padding: 2px 0 2px 0;
+    }
+  }
+
+  a{
+    text-decoration: none;
+    color: $font_color_text;
+    font-size: $main_font_size_mid;
+
+    &:visited {
+      color: $font_color_text;
+    }
+  }
+}

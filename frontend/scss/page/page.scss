@@ -1,0 +1,44 @@
+/* Переменные */
+
+/* Плейсхольдеры */
+
+%width_block{
+  @media (max-width: 767px) {
+    width: 300px;
+  }
+
+  @media (min-width: 768px) {
+    width: 600px;
+  }
+}
+
+/* ============================ */
+
+body{
+  min-width: 320px;
+  height: 100%;
+  overflow:scroll;
+
+  @media (max-width: 640px) {
+    background: url('./background@2x.jpg') no-repeat top center fixed;
+  }
+
+  @media (min-width: 641px) and (max-width: 960px) {
+    background: url('./background@3x.jpg') no-repeat top center fixed;
+  }
+
+  @media (min-width: 961px) {
+    background: url('./background-large.jpg') no-repeat top center fixed;
+  }
+}
+
+.page{
+  height:100%;
+  display: table;
+  width:100%;
+
+  .page__inner{
+    display: table-row;
+    height: 100%;
+  }
+}

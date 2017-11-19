@@ -1,0 +1,126 @@
+/* Переменные */
+
+$background_bg1: url(bgbut1.png) no-repeat top center;
+$background_bg2: url(bgbut2.png) no-repeat top center;
+
+/* Плейсхольдеры */
+
+/* mixin */
+@mixin sites__button_top_first($radius) {
+  -moz-border-radius-topleft: $radius;
+  -webkit-border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
+}
+
+@mixin sites__button_top_second($radius) {
+  -moz-border-radius-topright: $radius;
+  -webkit-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+@mixin sites__button_bottom_first($radius){
+  -moz-border-radius-bottomleft: $radius;
+  -webkit-border-bottom-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+
+@mixin sites__button_bottom_second($radius){
+  -moz-border-radius-bottomright: $radius;
+  -webkit-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+/* ============================ */
+
+.sites{
+  margin-top: 30px;
+  
+  .sites__button{
+    display: block;
+    float: left;
+    text-align: center;
+    font-size: $main_font_size_mid;
+
+    a {
+      width: 100%;
+      height: 100%;
+      display: block;
+      text-decoration: none;
+      letter-spacing: $letter_spacing;
+      color: #d2d2d2;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .sites__button {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      border: 0;
+    }
+
+    .sites__button:nth-child(odd) {
+      background: $background_bg1;
+    }
+
+    .sites__button:nth-child(even) {
+      background: $background_bg2;
+    }
+
+    .sites__button:nth-child(1) {
+      @include sites__button_top_first($border-radius);
+      @include sites__button_top_second($border-radius);
+    }
+
+    .sites__button:not(.sites__button_empty):nth-last-child(2) {
+      @include sites__button_bottom_first($border-radius);
+      @include sites__button_bottom_second($border-radius);
+    }
+
+    .sites__button:not(.sites__button_empty):nth-last-child(3) {
+      @include sites__button_bottom_first($border-radius);
+      @include sites__button_bottom_second($border-radius);
+    }
+
+    .sites__button_empty{
+      display: none;
+    }
+
+  }
+
+  @media (min-width: 768px) {
+    .sites__button {
+      width: 50%;
+      height: 70px;
+      line-height: 70px;
+      border: 0;
+    }
+
+    .sites__button:nth-child(4n-3),
+    .sites__button:nth-child(4n){
+      background: $background_bg1;
+    }
+
+    .sites__button:nth-child(4n-1),
+    .sites__button:nth-child(4n-2) {
+      background: $background_bg2;
+    }
+
+    .sites__button:nth-child(1) {
+      @include sites__button_top_first($border-radius);
+    }
+
+    .sites__button:nth-child(2) {
+      @include sites__button_top_second($border-radius);
+    }
+
+    .sites__button:nth-last-child(2) {
+      @include sites__button_bottom_second($border-radius);
+    }
+
+    .sites__button:nth-last-child(3) {
+      @include sites__button_bottom_first($border-radius);
+    }
+  }
+  
+}

@@ -1,0 +1,15 @@
+/* Переменные */
+
+$border-radius: 10px;
+
+/* ============================ */
+
+.wrapper{
+  .wrapper__inner {
+    margin: 0 auto;
+    @extend %width_block;
+  }
+}
+
+@import "wrapper__va-container/wrapper__va-container.scss";
+@import "wrapper__sites/wrapper__sites.scss";
