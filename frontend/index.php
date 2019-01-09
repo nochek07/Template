@@ -24,6 +24,8 @@
         $w = 0;
 
     $time_asterisk_authorization = 90;
+    $url_asterisk_authorization = '/check';
+    $url_default = '/';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -279,6 +281,8 @@
             slice: <?php echo $slice; ?>,
             form: '<?php echo $form; ?>',
             time_asterisk_authorization: <?php echo $time_asterisk_authorization; ?>,
+            url_asterisk_authorization: <?php echo $url_asterisk_authorization; ?>,
+            url_default: <?php echo $url_default; ?>,
             error_timer: 'Время закончилось. Вы будите перенапрвлены на начальную страницу!'
         }
     </script>

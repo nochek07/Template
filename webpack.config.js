@@ -5,8 +5,8 @@ const ExtractTextPlugin       = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin       = require("html-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const publicPath = '/HotSpot_template/assets';
-//const publicPath = '/themes/new/assets';
+//const publicPath = '/HotSpot_template/assets';
+const publicPath = '/bundles/hs/themes/istra/assets';
 
 const NODE_ENV = process.env.NODE_ENV || 'dev';
 
@@ -117,7 +117,7 @@ module.exports = {
     ]
 };
 
-if(NODE_ENV=='prod') {
+if(NODE_ENV==='prod') {
     module.exports.plugins.push(
         new webpack.optimize.UglifyJsPlugin({
             compress: {

@@ -22,21 +22,20 @@ require('fancybox/dist/js/jquery.fancybox.pack.js');
             if( this.length ) {
 
                 return this.each(function () {
-
                     //Параметры
                     methods.options = $.extend({}, methods.options, params);
 
                     methods.selectSlice(this);
 
-                    methods.initBindButton(this, 'form-sms', 'form-pass');
-                    methods.initBindButton(this, 'form-pass', 'form-sms');
+                    methods.initBindButton(this, 'sms', 'smspass');
+                    methods.initBindButton(this, 'smspass', 'sms');
 
-                    methods.initBindButton(this, 'form-rspn', 'form-rspn-m');
-                    methods.initBindButton(this, 'form-rspn-m', 'form-rspn');
+                    //methods.initBindButton(this, 'reseption', 'reseptionpass');
+                    //methods.initBindButton(this, 'reseptionpass', 'reseption');
 
                     methods.formSubmit(this);
 
-                    if(methods.options.form === 'form-phone'){
+                    if(methods.options.form === 'form-asterisk'){
                         methods.timer.time = methods.options.time_asterisk_authorization;
 
                         methods.timerCheck.time = methods.timer.time + 6;
@@ -45,7 +44,8 @@ require('fancybox/dist/js/jquery.fancybox.pack.js');
                         timer.text(methods.timer.time);
 
                         methods.timerId      = setInterval(methods.startTimer, 1000, timerMain, timer);
-                        methods.timerIdCheck = setInterval(methods.startTimerChek, 2000);
+                        methods.timerIdCheck = setInterval(methods.startTimerCheck, 2000);
+                        methods.Check();
                     }
 
                     methods.slices = $(this).find('div.va-slice');
@@ -63,12 +63,11 @@ require('fancybox/dist/js/jquery.fancybox.pack.js');
         clickSlice: function (eventObject) {
             if(methods.slices) {
                 methods.slices.each(function () {
-
                     var content = $('.va-slice__content', this);
 
                     content.hide(methods.options.animSpeed);
-                    if($(this).get(0)===eventObject.data.parent.get(0) &&
-                        content.css('display') === 'none') {
+                    if($(this).get(0)===eventObject.data.parent.get(0)
+                        && content.css('display') === 'none') {
                         content.show(methods.options.animSpeed);
                     }
                 });
@@ -79,8 +78,8 @@ require('fancybox/dist/js/jquery.fancybox.pack.js');
                 $('.va-slice-' + methods.options.slice + ' .va-slice__content', obj).show(100);
         },
         initBindButton: function (obj, source, receiver) {
-            var form = $('#' + source, obj),
-                slice = $('input[name=slice]', form).val();
+            var form = $('#form-' + source, obj),
+                slice = $("input[name='" + source + "_form[slice]']", form).val();
 
             var param = {
                 receiver: receiver,
@@ -90,12 +89,12 @@ require('fancybox/dist/js/jquery.fancybox.pack.js');
             $('.va-form__button', form).bind('click.slices', param, methods.clickButton);
         },
         clickButton: function (eventObject) {
-            window.location.href ='?form=' + eventObject.data.receiver + '&slice=' + eventObject.data.slice;
+            window.location.href ='?form=form-' + eventObject.data.receiver + '&slice=' + eventObject.data.slice;
             return true;
         },
         formSubmit: function (obj) {
             $('form.va-form', obj).bind('submit.slices', function () {
-                var phone = $('input[name=phone]', $(this));
+                var phone = $("input[name$='[phone]']", $(this));
                 if(phone.length){
                     var phoneCorrect = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){6,14}(\s*)?$/;
 
@@ -115,22 +114,27 @@ require('fancybox/dist/js/jquery.fancybox.pack.js');
                 timerMain.html(methods.options.error_timer);
             } else timer.text(methods.timer.time--);
         },
-        startTimerChek: function () {
+        startTimerCheck: function () {
             if(methods.timerCheck.time==0) {
                 clearInterval(methods.timerCheck.id);
                 window.location.href = '?slice=' + methods.options.slice + '&e=ERROR_SECOND';
             }
+            methods.timerCheck.time-=2;
+        },
+        Check: function () {
             $.ajax({
-                url: '/check',
+                url: methods.options.url_asterisk_authorization,
                 dataType: "json",
                 success: function (data) {
-                    if(data['status']===1){
+                    if(data['status']===1) {
                         clearInterval(methods.timerCheck.id);
                         window.location.href = '/';
+                    } else if(data['status']===-1) {
+                        clearInterval(methods.timerCheck.id);
+                        window.location.href = '?slice=' + methods.options.slice + '&e=ERROR';
                     }
                 }
             });
-            methods.timerCheck.time-=2;
         }
     };
 
@@ -181,6 +185,16 @@ $(document).ready(function() {
         }
     );
 
+    $('.autologin-enter a').click(function () {
+        setCookie('autologin', 'no', {expires: 43200});
+        return true;
+    });
+
+    $('.autologin__content button.va-form__submit').click(function(){
+        window.location.href = optionsSlices.url_default + 'autologin?phone=' + $(this).data('tel');
+        return true;
+    });
+
     function setCookie(name, value, options) {
         options = options || {};
 
@@ -209,15 +223,4 @@ $(document).ready(function() {
 
         document.cookie = updatedCookie;
     }
-
-    $('.autologin-enter a').click(function () {
-        setCookie('autologin', 'no', {expires: 43200});
-        return true;
-    });
-
-    $('.autologin__content button.va-form__submit').click(function(){
-        window.location.href ='/autologin?phone=' + $(this).data('tel');
-        return true;
-    });
-
 });

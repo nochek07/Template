@@ -24,6 +24,8 @@
         $w = 0;
 
     $time_asterisk_authorization = 90;
+    $url_asterisk_authorization = '/check';
+    $url_default = '/';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -37,7 +39,7 @@
     <meta http-equiv="x-rim-auto-match" content="none">
     <title>Title</title>
 
-<link rel="shortcut icon" href="/HotSpot_template/assets/favicon.ico"><link href="/HotSpot_template/assets/css/style.css" rel="stylesheet"></head>
+<link rel="shortcut icon" href="/bundles/hs/themes/istra/assets/favicon.ico"><link href="/bundles/hs/themes/istra/assets/css/style.css" rel="stylesheet"></head>
 <body>
     <div class="page">
         <div class="page__inner">
@@ -55,8 +57,8 @@
 
                             <div class="autologin__title">
                                 <div class="autologin__title_inner">
-                                    <img src="/HotSpot_template/assets/img/wireless-internet-img.png"
-                                         srcset="/HotSpot_template/assets/img/wireless-internet-img@2x.png 2x, /HotSpot_template/assets/img/wireless-internet-img@3x.png 3x">
+                                    <img src="/bundles/hs/themes/istra/assets//img/wireless-internet-img.png"
+                                         srcset="/bundles/hs/themes/istra/assets//img/wireless-internet-img@2x.png 2x, /bundles/hs/themes/istra/assets//img/wireless-internet-img@3x.png 3x">
                                     <div class="autologin-block-number">
                                         <div class="autologin-block-number__text">Ваш номер</div>
                                         <div class="autologin-block-number__number">+7 (927) 688-33-40?</div>
@@ -66,8 +68,8 @@
                             <div class="autologin__content">
                                 <div class="autologin__content_block">
                                     <button type="button" class="va-form__submit" data-tel="79276883340">
-                                        <img src="/HotSpot_template/assets/img/login.png"
-                                             srcset="/HotSpot_template/assets/img/login@2x.png 2x, /HotSpot_template/assets/img/login@3x.png 3x">
+                                        <img src="/bundles/hs/themes/istra/assets//img/login.png"
+                                             srcset="/bundles/hs/themes/istra/assets//img/login@2x.png 2x, /bundles/hs/themes/istra/assets//img/login@3x.png 3x">
                                         <span>Войти в интернет</span>
                                     </button>
                                 </div>
@@ -105,8 +107,8 @@
                             <div class="va-slice va-slice-1 va-container__inner_slice-first">
                                 <div class="va-slice__title">
                                     <div class="va-slice__title_inner">
-                                        <img src="/HotSpot_template/assets/img/bell.png"
-                                             srcset="/HotSpot_template/assets/img/bell@2x.png 2x, /HotSpot_template/assets/img/bell@3x.png 3x">
+                                        <img src="/bundles/hs/themes/istra/assets//img/bell.png"
+                                             srcset="/bundles/hs/themes/istra/assets//img/bell@2x.png 2x, /bundles/hs/themes/istra/assets//img/bell@3x.png 3x">
                                         По звонку
                                     </div>
                                 </div>
@@ -129,8 +131,8 @@
                                             <input type="hidden" name="slice" value="1">
 
                                             <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="/HotSpot_template/assets/img/bell-small.png"
-                                                     srcset="/HotSpot_template/assets/img/bell-small@2x.png 2x, /HotSpot_template/assets/img/bell-small@3x.png 3x">
+                                                <img src="/bundles/hs/themes/istra/assets//img/bell-small.png"
+                                                     srcset="/bundles/hs/themes/istra/assets//img/bell-small@2x.png 2x, /bundles/hs/themes/istra/assets//img/bell-small@3x.png 3x">
                                                 <span>Авторизация</span>
                                             </button>
                                         </div>
@@ -143,8 +145,8 @@
                             <div class="va-slice va-slice-2 va-container__inner_slice-next">
                                 <div class="va-slice__title">
                                     <div class="va-slice__title_inner">
-                                        <img src="/HotSpot_template/assets/img/vk.png"
-                                             srcset="/HotSpot_template/assets/img/vk@2x.png 2x, /HotSpot_template/assets/img/vk@3x.png 3x">
+                                        <img src="/bundles/hs/themes/istra/assets//img/vk.png"
+                                             srcset="/bundles/hs/themes/istra/assets//img/vk@2x.png 2x, /bundles/hs/themes/istra/assets//img/vk@3x.png 3x">
                                         Через соц. сети
                                     </div>
                                 </div>
@@ -156,8 +158,8 @@
                             <div class="va-slice va-slice-3 va-container__inner_slice-next">
                                 <div class="va-slice__title">
                                     <div class="va-slice__title_inner">
-                                        <img src="/HotSpot_template/assets/img/sms.png"
-                                             srcset="/HotSpot_template/assets/img/sms@2x.png 2x, /HotSpot_template/assets/img/sms@3x.png 3x">
+                                        <img src="/bundles/hs/themes/istra/assets//img/sms.png"
+                                             srcset="/bundles/hs/themes/istra/assets//img/sms@2x.png 2x, /bundles/hs/themes/istra/assets//img/sms@3x.png 3x">
                                         По СМС
                                     </div>
                                 </div>
@@ -174,8 +176,8 @@
                                             <input type="hidden" name="slice" value="3">
 
                                             <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="/HotSpot_template/assets/img/sms-small.png"
-                                                     srcset="/HotSpot_template/assets/img/sms-small@2x.png 2x, /HotSpot_template/assets/img/sms-small@3x.png 3x">
+                                                <img src="/bundles/hs/themes/istra/assets//img/sms-small.png"
+                                                     srcset="/bundles/hs/themes/istra/assets//img/sms-small@2x.png 2x, /bundles/hs/themes/istra/assets//img/sms-small@3x.png 3x">
                                                 <span>Авторизация</span>
                                             </button>
                                         </div>
@@ -198,8 +200,8 @@
                                             <input type="hidden" name="slice" value="3">
 
                                             <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="/HotSpot_template/assets/img/sms-small.png"
-                                                     srcset="/HotSpot_template/assets/img/sms-small@2x.png 2x, /HotSpot_template/assets/img/sms-small@3x.png 3x">
+                                                <img src="/bundles/hs/themes/istra/assets//img/sms-small.png"
+                                                     srcset="/bundles/hs/themes/istra/assets//img/sms-small@2x.png 2x, /bundles/hs/themes/istra/assets//img/sms-small@3x.png 3x">
                                                 <span>Авторизация</span>
                                             </button>
                                         </div>
@@ -218,8 +220,8 @@
                             <div class="va-slice va-slice-4 va-container__inner_slice-next">
                                 <div class="va-slice__title">
                                     <div class="va-slice__title_inner">
-                                        <img src="/HotSpot_template/assets/img/istra.png"
-                                             srcset="/HotSpot_template/assets/img/istra@2x.png 2x, /HotSpot_template/assets/img/istra@3x.png 3x">
+                                        <img src="/bundles/hs/themes/istra/assets//img/istra.png"
+                                             srcset="/bundles/hs/themes/istra/assets//img/istra@2x.png 2x, /bundles/hs/themes/istra/assets//img/istra@3x.png 3x">
                                         Логин ISTRANET.RU
                                     </div>
                                 </div>
@@ -238,8 +240,8 @@
                                             <input type="hidden" name="slice" value="4">
 
                                             <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="/HotSpot_template/assets/img/login.png"
-                                                     srcset="/HotSpot_template/assets/img/login@2x.png 2x, /HotSpot_template/assets/img/login@3x.png 3x">
+                                                <img src="/bundles/hs/themes/istra/assets//img/login.png"
+                                                     srcset="/bundles/hs/themes/istra/assets//img/login@2x.png 2x, /bundles/hs/themes/istra/assets//img/login@3x.png 3x">
                                                 <span>Авторизация</span>
                                             </button>
                                         </div>
@@ -279,8 +281,10 @@
             slice: <?php echo $slice; ?>,
             form: '<?php echo $form; ?>',
             time_asterisk_authorization: <?php echo $time_asterisk_authorization; ?>,
+            url_asterisk_authorization: <?php echo $url_asterisk_authorization; ?>,
+            url_default: <?php echo $url_default; ?>,
             error_timer: 'Время закончилось. Вы будите перенапрвлены на начальную страницу!'
         }
     </script>
-<script type="text/javascript" src="/HotSpot_template/assets/js/main.js"></script></body>
+<script type="text/javascript" src="/bundles/hs/themes/istra/assets/js/main.js"></script></body>
 </html>

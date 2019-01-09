@@ -18,7 +18,8 @@ $color_error: #ff6666;
 %input {
   border-radius: 100px;
   border: solid $input_border rgba(102, 210, 255, 0.3);
-  padding: 0 $input_padding 0 $input_padding;
+  /*padding: 0 $input_padding 0 $input_padding*/;
+  padding: 0;
   text-align: center;
   display: block;
 }
@@ -136,7 +137,6 @@ $color_error: #ff6666;
   }
 }
 
-  
 .va-form__block {
   width: 100%;
   padding-bottom: $block_padding;
@@ -171,9 +171,10 @@ $color_error: #ff6666;
     border-color: rgba(80, 230, 255, 0.5);
   }
 
+  box-sizing: border-box;
   color: $font_color;
   width: ($input_width - 2*$input_padding);
-  height: $input_height;
+  height: $input_height + 2*$input_border;
   font-size: $main_font_size_max;
   margin: 0 auto;
   @extend %input;
@@ -196,9 +197,11 @@ $color_error: #ff6666;
   &:hover{
     background-color: #255db8;
   }
-  width: ($input_width + 2*$input_border);
+  /*width: ($input_width + 2*$input_border);*/
+  width: ($input_width - 2*$input_padding);
   height: ($input_height + 2*$input_border);
   background-color: #3681fa;
+  padding: 0 $input_padding 0 $input_padding;
   margin: 0 auto;
   cursor: pointer;
   @extend %input;
@@ -215,8 +218,10 @@ button.va-form__submit {
   }
 
   span {
-    padding-right: $title_img_size_small + $title_img_size_small/2;
-    padding-left: $title_img_size_small/2;
+    /*padding-right: $title_img_size_small + $title_img_size_small/2;
+    padding-left: $title_img_size_small/2;*/
+    padding-right: $input_border;
+    padding-left: $input_border;
   }
 }
 
