@@ -1,12 +1,12 @@
 {
   "name": "hotspot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "nochek",
   "license": "ISC",
   "description": "hotspot template",
   "main": "app.js",
   "dependencies": {
-    "ajv": "^6.5.4"
+    "ajv": "^6.6.2"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
@@ -16,7 +16,7 @@
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^2.30.1",
     "jquery": "^1.12.4",
-    "node-sass": "^4.9.4",
+    "node-sass": "^4.11.0",
     "normalize.css": "^7.0.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "path": "^0.12.7",
