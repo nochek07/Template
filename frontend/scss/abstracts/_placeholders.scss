@@ -1,0 +1,19 @@
+
+%font_part {
+  text-transform: uppercase;
+  letter-spacing: $letter_spacing;
+}
+%font {
+  font-size: $main_font_size;
+  @extend %font_part;
+}
+
+%width_block{
+  @media (max-width: 767px) {
+    width: 300px;
+  }
+
+  @media (min-width: 768px) {
+    width: 600px;
+  }
+}

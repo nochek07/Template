@@ -12,7 +12,7 @@
     @media (max-width: 767px) {
       height: $logo_height;
       width: $logo_width;
-      background: url(./istranet-logo-img.png) no-repeat center center;
+      background: url(istranet-logo-img.png) no-repeat center center;
       top: 10px + ($header_height_mobile - $logo_height)/2;
     }
 
@@ -21,7 +21,7 @@
     (max-width: 767px) and (-o-min-device-pixel-ratio: 3/2),
     (max-width: 767px) and (min-resolution: 1.5dppx),
     (max-width: 767px) and (min-resolution: 144dpi)  {
-        background-image: url(./istranet-logo-img@2x.png);
+        background-image: url(istranet-logo-img@2x.png);
         background-size: $logo_width $logo_height;
     }
 
@@ -30,7 +30,7 @@
     @media (min-width: 768px) {
       height: $logo_height_2;
       width: $logo_width_2;
-      background: url(./istranet-logo-img2.png) no-repeat center center;
+      background: url(istranet-logo-img2.png) no-repeat center center;
       top: 10px + ($header_height_desktop - $logo_height_2)/2;
     }
 
@@ -39,7 +39,7 @@
     (min-width: 768px) and (-o-min-device-pixel-ratio: 3/2),
     (min-width: 768px) and (min-resolution: 1.5dppx),
     (min-width: 768px) and (min-resolution: 144dpi)  {
-      background-image: url(./istranet-logo-img2@2x.png);
+      background-image: url(istranet-logo-img2@2x.png);
       background-size: $logo_width_2 $logo_height_2;
     }
 

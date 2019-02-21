@@ -1,9 +1,6 @@
 /* Переменные */
-
 $background_bg1: url(bgbut1.png) no-repeat top center;
 $background_bg2: url(bgbut2.png) no-repeat top center;
-
-/* Плейсхольдеры */
 
 /* mixin */
 @mixin sites__button_top_first($radius) {
@@ -122,5 +119,4 @@ $background_bg2: url(bgbut2.png) no-repeat top center;
       @include sites__button_bottom_first($border-radius);
     }
   }
-  
 }

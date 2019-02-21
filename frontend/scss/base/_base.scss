@@ -1,0 +1,22 @@
+@font-face {
+  font-family: Circle;
+  src: url('../../fonts/Circe-Regular.eot');
+  src: url('../../fonts/Circe-Regular.eot') format('embedded-opentype'),
+  url('../../fonts/Circe-Regular.ttf');
+}
+
+html{
+  height:100%;
+}
+
+body{
+  font-family: $main_family;
+}
+
+.clearboth {
+  clear: both;
+}
+
+.nowrap {
+  white-space:nowrap;
+}

@@ -1,5 +1,4 @@
 /* Переменные */
-
 $title_height: 40px;
 $title_img_size: 23px;
 $title_img_size_small: 21px;
@@ -14,7 +13,6 @@ $input_padding: 10px;
 $color_error: #ff6666;
 
 /* Плейсхольдеры */
-
 %input {
   border-radius: 100px;
   border: solid $input_border rgba(102, 210, 255, 0.3);
@@ -313,7 +311,7 @@ button.va-form__button {
     }
     
     &:after {
-      content: url(./right@2x.png);
+      content: url(right@2x.png);
       vertical-align: middle;
       position: relative;
       padding: 0 8px;

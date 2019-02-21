@@ -17,11 +17,13 @@
         $e = 1;
     else
         $e = 0;
-
+ 
     if(isset($_GET['w']))
         $w = 1;
     else
         $w = 0;
+
+    $autologin = false;
 
     $time_asterisk_authorization = 90;
     $url_asterisk_authorization = '/check';
@@ -52,13 +54,14 @@
             <main class="wrapper">
                 <div class="wrapper__inner wrapper__va-container">
 
+                    <?php if($autologin): ?>
                     <div class="va-container autologin">
                         <div class="va-container__inner">
 
                             <div class="autologin__title">
                                 <div class="autologin__title_inner">
-                                    <img src="<%= require('./scss/wrapper/wrapper__va-container/wireless-internet-img.png') %>"
-                                         srcset="<%= require('./scss/wrapper/wrapper__va-container/wireless-internet-img@2x.png') %> 2x, <%= require('./scss/wrapper/wrapper__va-container/wireless-internet-img@3x.png') %> 3x">
+                                    <img src="<%= require('./scss/layout/wrapper__va-container/wireless-internet-img.png') %>"
+                                         srcset="<%= require('./scss/layout/wrapper__va-container/wireless-internet-img@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/wireless-internet-img@3x.png') %> 3x">
                                     <div class="autologin-block-number">
                                         <div class="autologin-block-number__text">Ваш номер</div>
                                         <div class="autologin-block-number__number">+7 (927) 688-33-40?</div>
@@ -68,8 +71,8 @@
                             <div class="autologin__content">
                                 <div class="autologin__content_block">
                                     <button type="button" class="va-form__submit" data-tel="79276883340">
-                                        <img src="<%= require('./scss/wrapper/wrapper__va-container/login.png') %>"
-                                             srcset="<%= require('./scss/wrapper/wrapper__va-container/login@2x.png') %> 2x, <%= require('./scss/wrapper/wrapper__va-container/login@3x.png') %> 3x">
+                                        <img src="<%= require('./scss/layout/wrapper__va-container/login.png') %>"
+                                             srcset="<%= require('./scss/layout/wrapper__va-container/login@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/login@3x.png') %> 3x">
                                         <span>Войти в интернет</span>
                                     </button>
                                 </div>
@@ -81,6 +84,7 @@
                             
                         </div>
                     </div>
+                    <?php endif; ?>
 
                     <?php if($e==1 || $w==1):?>
                     <div class="block-container">
@@ -107,8 +111,8 @@
                             <div class="va-slice va-slice-1 va-container__inner_slice-first">
                                 <div class="va-slice__title">
                                     <div class="va-slice__title_inner">
-                                        <img src="<%= require('./scss/wrapper/wrapper__va-container/bell.png') %>"
-                                             srcset="<%= require('./scss/wrapper/wrapper__va-container/bell@2x.png') %> 2x, <%= require('./scss/wrapper/wrapper__va-container/bell@3x.png') %> 3x">
+                                        <img src="<%= require('./scss/layout/wrapper__va-container/bell.png') %>"
+                                             srcset="<%= require('./scss/layout/wrapper__va-container/bell@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/bell@3x.png') %> 3x">
                                         По звонку
                                     </div>
                                 </div>
@@ -116,7 +120,7 @@
                                     <?php if($form==='form-phone'): ?>
                                         <div class="timer">
                                             <p>ЗВОНИ НА НОМЕР <span class="timer__phone"></span> И БУДЕТ ТЕБЕ ИНТЕРНЕТ</p>
-                                                <iframe src="phone.html"></iframe>
+                                            <a href="tel:84983164444">8(498)316-44-44</a>
                                             <p>Втечении <span class="timer__time"></span> с возможно позвонить!</p>
                                         </div>
                                     <?php else: ?>
@@ -131,8 +135,8 @@
                                             <input type="hidden" name="slice" value="1">
 
                                             <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="<%= require('./scss/wrapper/wrapper__va-container/bell-small.png') %>"
-                                                     srcset="<%= require('./scss/wrapper/wrapper__va-container/bell-small@2x.png') %> 2x, <%= require('./scss/wrapper/wrapper__va-container/bell-small@3x.png') %> 3x">
+                                                <img src="<%= require('./scss/layout/wrapper__va-container/bell-small.png') %>"
+                                                     srcset="<%= require('./scss/layout/wrapper__va-container/bell-small@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/bell-small@3x.png') %> 3x">
                                                 <span>Авторизация</span>
                                             </button>
                                         </div>
@@ -145,8 +149,8 @@
                             <div class="va-slice va-slice-2 va-container__inner_slice-next">
                                 <div class="va-slice__title">
                                     <div class="va-slice__title_inner">
-                                        <img src="<%= require('./scss/wrapper/wrapper__va-container/vk.png') %>"
-                                             srcset="<%= require('./scss/wrapper/wrapper__va-container/vk@2x.png') %> 2x, <%= require('./scss/wrapper/wrapper__va-container/vk@3x.png') %> 3x">
+                                        <img src="<%= require('./scss/layout/wrapper__va-container/vk.png') %>"
+                                             srcset="<%= require('./scss/layout/wrapper__va-container/vk@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/vk@3x.png') %> 3x">
                                         Через соц. сети
                                     </div>
                                 </div>
@@ -158,8 +162,8 @@
                             <div class="va-slice va-slice-3 va-container__inner_slice-next">
                                 <div class="va-slice__title">
                                     <div class="va-slice__title_inner">
-                                        <img src="<%= require('./scss/wrapper/wrapper__va-container/sms.png') %>"
-                                             srcset="<%= require('./scss/wrapper/wrapper__va-container/sms@2x.png') %> 2x, <%= require('./scss/wrapper/wrapper__va-container/sms@3x.png') %> 3x">
+                                        <img src="<%= require('./scss/layout/wrapper__va-container/sms.png') %>"
+                                             srcset="<%= require('./scss/layout/wrapper__va-container/sms@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/sms@3x.png') %> 3x">
                                         По СМС
                                     </div>
                                 </div>
@@ -176,8 +180,8 @@
                                             <input type="hidden" name="slice" value="3">
 
                                             <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="<%= require('./scss/wrapper/wrapper__va-container/sms-small.png') %>"
-                                                     srcset="<%= require('./scss/wrapper/wrapper__va-container/sms-small@2x.png') %> 2x, <%= require('./scss/wrapper/wrapper__va-container/sms-small@3x.png') %> 3x">
+                                                <img src="<%= require('./scss/layout/wrapper__va-container/sms-small.png') %>"
+                                                     srcset="<%= require('./scss/layout/wrapper__va-container/sms-small@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/sms-small@3x.png') %> 3x">
                                                 <span>Авторизация</span>
                                             </button>
                                         </div>
@@ -200,8 +204,8 @@
                                             <input type="hidden" name="slice" value="3">
 
                                             <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="<%= require('./scss/wrapper/wrapper__va-container/sms-small.png') %>"
-                                                     srcset="<%= require('./scss/wrapper/wrapper__va-container/sms-small@2x.png') %> 2x, <%= require('./scss/wrapper/wrapper__va-container/sms-small@3x.png') %> 3x">
+                                                <img src="<%= require('./scss/layout/wrapper__va-container/sms-small.png') %>"
+                                                     srcset="<%= require('./scss/layout/wrapper__va-container/sms-small@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/sms-small@3x.png') %> 3x">
                                                 <span>Авторизация</span>
                                             </button>
                                         </div>
@@ -220,8 +224,8 @@
                             <div class="va-slice va-slice-4 va-container__inner_slice-next">
                                 <div class="va-slice__title">
                                     <div class="va-slice__title_inner">
-                                        <img src="<%= require('./scss/wrapper/wrapper__va-container/istra.png') %>"
-                                             srcset="<%= require('./scss/wrapper/wrapper__va-container/istra@2x.png') %> 2x, <%= require('./scss/wrapper/wrapper__va-container/istra@3x.png') %> 3x">
+                                        <img src="<%= require('./scss/layout/wrapper__va-container/istra.png') %>"
+                                             srcset="<%= require('./scss/layout/wrapper__va-container/istra@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/istra@3x.png') %> 3x">
                                         Логин ISTRANET.RU
                                     </div>
                                 </div>
@@ -240,8 +244,8 @@
                                             <input type="hidden" name="slice" value="4">
 
                                             <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="<%= require('./scss/wrapper/wrapper__va-container/login.png') %>"
-                                                     srcset="<%= require('./scss/wrapper/wrapper__va-container/login@2x.png') %> 2x, <%= require('./scss/wrapper/wrapper__va-container/login@3x.png') %> 3x">
+                                                <img src="<%= require('./scss/layout/wrapper__va-container/login.png') %>"
+                                                     srcset="<%= require('./scss/layout/wrapper__va-container/login@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/login@3x.png') %> 3x">
                                                 <span>Авторизация</span>
                                             </button>
                                         </div>
@@ -281,8 +285,8 @@
             slice: <?php echo $slice; ?>,
             form: '<?php echo $form; ?>',
             time_asterisk_authorization: <?php echo $time_asterisk_authorization; ?>,
-            url_asterisk_authorization: <?php echo $url_asterisk_authorization; ?>,
-            url_default: <?php echo $url_default; ?>,
+            url_asterisk_authorization: '<?php echo $url_asterisk_authorization; ?>',
+            url_default: '<?php echo $url_default; ?>',
             error_timer: 'Время закончилось. Вы будите перенапрвлены на начальную страницу!'
         }
     </script>

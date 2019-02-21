@@ -1,72 +1,16 @@
 @import url("~normalize.css");
-@font-face {
-  font-family: Circle;
-  src: url('../fonts/Circe-Regular.eot'),
-       url('../fonts/Circe-Regular.ttf');
-}
 
-/* Переменные */
-$main_font_size: 13px;
-$main_font_size_mid: 14px;
-$main_font_size_max: 18px;
+@import 'abstracts/_variables.scss';
+@import 'abstracts/_placeholders.scss';
 
-$main_family: Circle, Helvetica, sans-serif;
-$font_color: #6a6a6a;
-$font_color_text: #ffffff;
-$letter_spacing: 0.5px;
+@import 'base/_base.scss';
+@import 'base/_forms.scss';
 
-/* Плейсхольдеры */
-%font_part {
-  text-transform: uppercase;
-  letter-spacing: $letter_spacing;
-}
-%font {
-  font-size: $main_font_size;
-  @extend %font_part;
-}
+@import 'layout/_header.scss';
+@import 'layout/_wrapper.scss';
+@import 'layout/_footer.scss';
 
-/* ============================ */
-
-html{
-  height:100%;
-}
-
-body{
-  font-family: $main_family;
-}
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: $main_family;
-}
-
-input[type=submit],
-button[type=submit],
-button[type=button]{
-  font-size: $main_font_size;
-  letter-spacing: 0.6px;
-  font-weight: bold;
-  color: #ffffff;
-  text-transform: uppercase;
-}
-
-.clearboth {
-  clear: both;
-}
-
-.nowrap {
-  white-space:nowrap;
-}
-
-@import "page/page.scss";
-@import "header/header.scss";
-@import "wrapper/wrapper.scss";
-@import "footer/footer.scss";
+@import 'pages/_home.scss';
+@import 'pages/_faq.scss';
 
 @import "~fancybox/dist/css/jquery.fancybox.css";
-
-/* FAQ */
-@import "faq/faq.scss";

@@ -1,3 +1,4 @@
+
 const webpack = require('webpack');
 const path    = require('path');
 
@@ -5,10 +6,12 @@ const ExtractTextPlugin       = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin       = require("html-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-//const publicPath = '/HotSpot_template/assets';
-const publicPath = '/bundles/hs/themes/istra/assets';
-
 const NODE_ENV = process.env.NODE_ENV || 'dev';
+
+var publicPath = '/HotSpot_template/assets';
+if(NODE_ENV === 'prod') {
+    publicPath = '/bundles/hs/themes/istra/assets';
+}
 
 process.noDeprecation = true;
 //process.traceDeprecation = true;
@@ -101,12 +104,6 @@ module.exports = {
             filename: __dirname + '/public/faq.php',
             title: 'FAQ',
             template: __dirname + '/frontend/faq.php',
-            inject: false
-        }),
-        new HtmlWebpackPlugin({
-            filename: __dirname + '/public/phone.html',
-            title: 'phone',
-            template: __dirname + '/frontend/phone.html',
             inject: false
         }),
         new webpack.ProvidePlugin({

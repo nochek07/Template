@@ -17,11 +17,13 @@
         $e = 1;
     else
         $e = 0;
-
+ 
     if(isset($_GET['w']))
         $w = 1;
     else
         $w = 0;
+
+    $autologin = false;
 
     $time_asterisk_authorization = 90;
     $url_asterisk_authorization = '/check';
@@ -52,6 +54,7 @@
             <main class="wrapper">
                 <div class="wrapper__inner wrapper__va-container">
 
+                    <?php if($autologin): ?>
                     <div class="va-container autologin">
                         <div class="va-container__inner">
 
@@ -81,6 +84,7 @@
                             
                         </div>
                     </div>
+                    <?php endif; ?>
 
                     <?php if($e==1 || $w==1):?>
                     <div class="block-container">
@@ -116,7 +120,7 @@
                                     <?php if($form==='form-phone'): ?>
                                         <div class="timer">
                                             <p>ЗВОНИ НА НОМЕР <span class="timer__phone"></span> И БУДЕТ ТЕБЕ ИНТЕРНЕТ</p>
-                                                <iframe src="phone.html"></iframe>
+                                            <a href="tel:84983164444">8(498)316-44-44</a>
                                             <p>Втечении <span class="timer__time"></span> с возможно позвонить!</p>
                                         </div>
                                     <?php else: ?>
@@ -281,8 +285,8 @@
             slice: <?php echo $slice; ?>,
             form: '<?php echo $form; ?>',
             time_asterisk_authorization: <?php echo $time_asterisk_authorization; ?>,
-            url_asterisk_authorization: <?php echo $url_asterisk_authorization; ?>,
-            url_default: <?php echo $url_default; ?>,
+            url_asterisk_authorization: '<?php echo $url_asterisk_authorization; ?>',
+            url_default: '<?php echo $url_default; ?>',
             error_timer: 'Время закончилось. Вы будите перенапрвлены на начальную страницу!'
         }
     </script>
