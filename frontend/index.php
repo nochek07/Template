@@ -40,7 +40,6 @@
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="x-rim-auto-match" content="none">
     <title>Title</title>
-
 </head>
 <body>
     <div class="page">

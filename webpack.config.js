@@ -1,4 +1,3 @@
-
 const webpack = require('webpack');
 const path    = require('path');
 
@@ -8,12 +7,12 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'dev';
 
-var publicPath = '/HotSpot_template/assets';
+var publicPath = '/assets';
 if(NODE_ENV === 'prod') {
     publicPath = '/bundles/hs/themes/istra/assets';
 }
 
-process.noDeprecation = true;
+//process.noDeprecation = true;
 //process.traceDeprecation = true;
 
 module.exports = {
@@ -24,7 +23,7 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, 'public/assets'),
-        publicPath: publicPath + '/',
+        publicPath: publicPath,
         filename: 'js/[name].js'
     },
 
@@ -44,9 +43,14 @@ module.exports = {
                         {
                             loader: 'css-loader'
                         }, {
-                            loader: 'autoprefixer-loader',
+                            loader: 'postcss-loader',
                             options: {
-                                browsers: ['ie > 8', 'ff >= 15', 'Safari > 3', 'Android >=4', 'Chrome > 10', 'Last 4 versions']
+                                ident: 'postcss',
+                                plugins: [
+                                    require('autoprefixer')({
+                                        browsers: ['ie > 8', 'ff >= 15', 'Safari > 3', 'Android >=4', 'Chrome > 10', 'Last 4 versions']
+                                    }),
+                                ]
                             }
                         }, {
                             loader: 'resolve-url-loader'
@@ -67,7 +71,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '/img/[name].[ext]',
+                            name: 'img/[name].[ext]',
                             publicPath: publicPath
                         }
                     }
@@ -78,7 +82,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '/fonts/[name].[ext]',
+                            name: 'fonts/[name].[ext]',
                             publicPath: publicPath
                         }
                     }

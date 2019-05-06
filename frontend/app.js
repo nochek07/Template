@@ -1,4 +1,3 @@
-
 var $ = require('jquery/dist/jquery.min.js');
 
 require('fancybox/dist/js/jquery.fancybox.pack.js');
@@ -29,10 +28,7 @@ require('fancybox/dist/js/jquery.fancybox.pack.js');
 
                     methods.initBindButton(this, 'sms', 'smspass');
                     methods.initBindButton(this, 'smspass', 'sms');
-
-                    //methods.initBindButton(this, 'reseption', 'reseptionpass');
-                    //methods.initBindButton(this, 'reseptionpass', 'reseption');
-
+                    
                     methods.formSubmit(this);
 
                     if(methods.options.form === 'form-asterisk'){
