@@ -6,7 +6,8 @@
   "description": "hotspot template",
   "main": "app.js",
   "dependencies": {
-    "ajv": "^6.6.2"
+    "ajv": "^6.6.2",
+    "tar": "^4.4.8"
   },
   "devDependencies": {
     "autoprefixer": "^9.5.1",
