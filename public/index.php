@@ -1,27 +1,22 @@
 <?php
-    if (isset($_POST['submit'])){
-      header("Location: ?form={$_POST['form']}&slice={$_POST['slice']}");
+    if (isset($_POST['submit'])) {
+        header("Location: ?form={$_POST['form']}&slice={$_POST['slice']}");
     }
 
-    if(isset($_GET['slice']))
-        $slice = $_GET['slice'];
-    else
-        $slice = 0;
+    $slice = $_GET['slice'] ?? 0;
+    $form = $_GET['form'] ?? null;;
 
-    if(isset($_GET['form']))
-        $form = $_GET['form'];
-    else
-        $form = null;
+    if (isset($_GET['e'])) {
+        $error = 1;
+    } else {
+        $error = 0;
+    }
 
-    if(isset($_GET['e']))
-        $e = 1;
-    else
-        $e = 0;
- 
-    if(isset($_GET['w']))
-        $w = 1;
-    else
-        $w = 0;
+    if (isset($_GET['w'])) {
+        $warning = 1;
+    } else {
+        $warning = 0;
+    }
 
     $autologin = false;
 
@@ -53,7 +48,7 @@
             <main class="wrapper">
                 <div class="wrapper__inner wrapper__va-container">
 
-                    <?php if($autologin): ?>
+                    <?php if ($autologin): ?>
                     <div class="va-container autologin">
                         <div class="va-container__inner">
 
@@ -85,15 +80,15 @@
                     </div>
                     <?php endif; ?>
 
-                    <?php if($e==1 || $w==1):?>
+                    <?php if ($error == 1 || $warning == 1): ?>
                     <div class="block-container">
-                        <?php if($e==1):?>
+                        <?php if ($error == 1): ?>
                         <div class="block-container__inner block-container__error">
                             Ошибка
                         </div>
                         <?php endif; ?>
 
-                        <?php if($w==1):?>
+                        <?php if ($warning == 1): ?>
                         <div class="block-container__inner block-container__warning">
                             Прежупреждение
                         </div>
@@ -116,7 +111,7 @@
                                     </div>
                                 </div>
                                 <div class="va-slice__content">
-                                    <?php if($form==='form-phone'): ?>
+                                    <?php if ($form === 'form-phone'): ?>
                                         <div class="timer">
                                             <p>ЗВОНИ НА НОМЕР <span class="timer__phone"></span> И БУДЕТ ТЕБЕ ИНТЕРНЕТ</p>
                                             <a href="tel:84983164444">8(498)316-44-44</a>
@@ -167,7 +162,7 @@
                                     </div>
                                 </div>
                                 <div class="va-slice__content">
-                                    <?php if($form=='form-pass'): ?>
+                                    <?php if ($form == 'form-pass'): ?>
                                     <form id="form-pass" method="post" class="va-form">
                                         <div class="va-form__block">
                                             <label class="va-form__label">Введите полученный пароль

@@ -43,16 +43,6 @@ module.exports = {
                         {
                             loader: 'css-loader'
                         }, {
-                            loader: 'postcss-loader',
-                            options: {
-                                ident: 'postcss',
-                                plugins: [
-                                    require('autoprefixer')({
-                                        browsers: ['ie > 8', 'ff >= 15', 'Safari > 3', 'Android >=4', 'Chrome > 10', 'Last 4 versions']
-                                    }),
-                                ]
-                            }
-                        }, {
                             loader: 'resolve-url-loader'
                         }, {
                             loader: 'sass-loader',
