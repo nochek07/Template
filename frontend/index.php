@@ -4,7 +4,7 @@
     }
 
     $slice = $_GET['slice'] ?? 0;
-    $form = $_GET['form'] ?? null;;
+    $form = $_GET['form'] ?? null;
 
     if (isset($_GET['e'])) {
         $error = 1;
