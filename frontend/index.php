@@ -5,18 +5,8 @@
 
     $slice = $_GET['slice'] ?? 0;
     $form = $_GET['form'] ?? null;
-
-    if (isset($_GET['e'])) {
-        $error = 1;
-    } else {
-        $error = 0;
-    }
-
-    if (isset($_GET['w'])) {
-        $warning = 1;
-    } else {
-        $warning = 0;
-    }
+    $error = isset($_GET['e']) ? 1 : 0;
+    $warning = isset($_GET['w']) ? 1 : 0;
 
     $autologin = false;
 
@@ -162,7 +152,7 @@
                                     </div>
                                 </div>
                                 <div class="va-slice__content">
-                                    <?php if ($form == 'form-pass'): ?>
+                                    <?php if ($form === 'form-pass'): ?>
                                     <form id="form-pass" method="post" class="va-form">
                                         <div class="va-form__block">
                                             <label class="va-form__label">Введите полученный пароль
@@ -275,14 +265,14 @@
     </div>
 
     <script type='text/javascript'>
-        var optionsSlices = {
+        let optionsSlices = {
             slice: <?php echo $slice; ?>,
             form: '<?php echo $form; ?>',
             time_asterisk_authorization: <?php echo $time_asterisk_authorization; ?>,
             url_asterisk_authorization: '<?php echo $url_asterisk_authorization; ?>',
             url_default: '<?php echo $url_default; ?>',
             error_timer: 'Время закончилось. Вы будите перенапрвлены на начальную страницу!'
-        }
+        };
     </script>
 </body>
 </html>

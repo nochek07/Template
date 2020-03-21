@@ -4,11 +4,12 @@ const path    = require('path');
 const ExtractTextPlugin       = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin       = require("html-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin          = require('uglifyjs-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'dev';
 
-var publicPath = '/assets';
-if(NODE_ENV === 'prod') {
+let publicPath = '/assets';
+if (NODE_ENV === 'prod') {
     publicPath = '/bundles/hs/themes/istra/assets';
 }
 
@@ -108,13 +109,15 @@ module.exports = {
     ]
 };
 
-if(NODE_ENV==='prod') {
+if (NODE_ENV === 'prod') {
     module.exports.plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
+        new UglifyJsPlugin({
+            uglifyOptions: {
                 warnings: false,
-                drop_console: true,
-                unsafe: true
+                compress: {
+                    drop_console: true,
+                    unsafe: true
+                }
             }
         })
     );
@@ -124,7 +127,7 @@ if(NODE_ENV==='prod') {
             assetNameRegExp: /\.css$/,
             cssProcessor: require('cssnano'),
             cssProcessorOptions: {
-                autoprefixer:false,
+                autoprefixer: false,
                 discardComments: {removeAll: true }
             },
             canPrint: true
