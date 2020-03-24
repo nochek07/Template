@@ -1,6 +1,6 @@
 {
   "name": "hotspot",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "nochek",
   "license": "ISC",
   "description": "hotspot template",
@@ -13,6 +13,7 @@
     "mem": "^5.0.0",
     "minimist": ">=1.2.5",
     "mixin-deep": "^2.0.1",
+    "serialize-javascript": "^2.1.1",
     "set-value": "^3.0.1",
     "tar": "^4.4.0"
   },
