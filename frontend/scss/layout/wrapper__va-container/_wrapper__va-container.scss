@@ -11,6 +11,8 @@ $input_width: 240px;
 $input_padding: 10px;
 
 $color_error: #ff6666;
+$color_text: #404040;
+$color_text_autologin: #6a6a6a;
 
 /* Плейсхольдеры */
 %input {
@@ -56,7 +58,7 @@ $color_error: #ff6666;
     background-clip: padding-box;
     background-color: #ffffff;
     /*box-shadow: 0 6px 34px 0 rgba(0, 0, 0, 0.16);*/
-    -webkit-backdrop-filter: blur(19.6px);
+    --webkit-backdrop-filter: blur(19.6px);
     backdrop-filter: blur(19.6px);
   }
 
@@ -70,13 +72,17 @@ $color_error: #ff6666;
 }
 
 .va-container{
-  border-radius: $border-radius;
-  -webkit-backdrop-filter: blur(19.6px);
-  backdrop-filter: blur(19.6px);
-  background-color: #ffffff;
+  /*background-color: rgba(223, 223, 223, 0.8);*/
+
+  .va-container__inner {
+    border-radius: $border-radius;
+    --webkit-backdrop-filter: blur(19.6px);
+    backdrop-filter: blur(19.6px);
+    background-color: #ffffff;
+  }
   /*box-shadow: 0 12px 34px 0 rgba(0, 0, 0, 0.16);*/
 
-  .va-container__inner_slice-next{
+  .va-container__inner_slice-next, .va-container__inner_slice-first{
     box-shadow: 0 -6px 38px 0 rgba(0, 0, 0, 0.26);
   }
 }
@@ -91,7 +97,7 @@ $color_error: #ff6666;
     padding: 10px;
     text-align: left;
     font-weight: bold;
-    color: #404040;
+    color: $color_text;
     cursor: pointer;
     @extend %font;
 
@@ -160,7 +166,6 @@ $color_error: #ff6666;
     color: $clr;
     text-align:center;
   }
-
   &:-ms-input-placeholder {
     color: $clr;
     text-align:center;
@@ -252,7 +257,7 @@ button.va-form__button {
   .autologin__title{
     padding: 35px 10px 25px 10px;
     text-align: left;
-    color: #6a6a6a;
+    color: $color_text_autologin;
 
     .autologin__title_inner {
       width: ($input_width + 2*$input_border);
@@ -307,7 +312,7 @@ button.va-form__button {
 
     a{
       text-decoration: none;
-      color: #6a6a6a;
+      color: $color_text_autologin;
     }
     
     &:after {

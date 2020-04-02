@@ -31,10 +31,21 @@ $background_bg2: url(bgbut2.png) no-repeat top center;
 
 .sites{
   margin-top: 30px;
-  
-  .sites__button{
-    display: block;
+
+  .sites__button {
     float: left;
+  }
+
+  .sites__button_100 {
+    background: $background_bg1;
+    @include sites__button_top_first($border-radius);
+    @include sites__button_top_second($border-radius);
+    @include sites__button_bottom_first($border-radius);
+    @include sites__button_bottom_second($border-radius);
+  }
+
+  .sites__button, .sites__button_100 {
+    display: block;
     text-align: center;
     font-size: $main_font_size_mid;
 
@@ -49,7 +60,7 @@ $background_bg2: url(bgbut2.png) no-repeat top center;
   }
 
   @media (max-width: 767px) {
-    .sites__button {
+    .sites__button, .sites__button_100 {
       width: 100%;
       height: 50px;
       line-height: 50px;
@@ -74,7 +85,7 @@ $background_bg2: url(bgbut2.png) no-repeat top center;
       @include sites__button_bottom_second($border-radius);
     }
 
-    .sites__button:not(.sites__button_empty):nth-last-child(3) {
+    .sites__button:nth-last-child(3).sites__button_empty_pre {
       @include sites__button_bottom_first($border-radius);
       @include sites__button_bottom_second($border-radius);
     }
@@ -82,12 +93,16 @@ $background_bg2: url(bgbut2.png) no-repeat top center;
     .sites__button_empty{
       display: none;
     }
-
   }
 
   @media (min-width: 768px) {
     .sites__button {
       width: 50%;
+    }
+    .sites__button_100 {
+      width: 100%;
+    }
+    .sites__button, .sites__button_100 {
       height: 70px;
       line-height: 70px;
       border: 0;

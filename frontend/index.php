@@ -70,6 +70,8 @@
                     </div>
                     <?php endif; ?>
 
+                    <?php if (!$autologin): ?>
+
                     <?php if ($error == 1 || $warning == 1): ?>
                     <div class="block-container">
                         <?php if ($error == 1): ?>
@@ -80,7 +82,7 @@
 
                         <?php if ($warning == 1): ?>
                         <div class="block-container__inner block-container__warning">
-                            Прежупреждение
+                            Предупреждение
                         </div>
                         <?php endif; ?>
                     </div>
@@ -238,6 +240,7 @@
                             </div>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="wrapper__inner wrapper__sites">
@@ -246,9 +249,15 @@
                         <div class="sites__button"><a href="#">Дедовск Online</a></div>
                         <div class="sites__button"><a href="#">Новый Иерусалим</a></div>
                         <div class="sites__button"><a href="#">Facebook InstaRF</a></div>
-                        <div class="sites__button"><a href="#">Facebook InstaRF</a></div>
+                        <div class="sites__button sites__button_empty_pre"><a href="#">Facebook InstaRF</a></div>
                         <div class="sites__button sites__button_empty"></div>
                         <div class="clearboth"></div>
+                    </div>
+                </div>
+
+                <div class="wrapper__inner wrapper__sites">
+                    <div class="sites">
+                        <div class="sites__button_100"><a href="#">Наш сайт</a></div>
                     </div>
                 </div>
             </main>
