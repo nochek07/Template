@@ -1,14 +1,11 @@
 
 .fancybox-wrap{
-
   @media (max-width: 767px) {
     width: 300px !important;
-    width: 300px;
   }
 
   @media (min-width: 768px) {
     width: 600px !important;
-    width: 600px;
   }
   
   .fancybox-inner{
@@ -48,7 +45,7 @@
     color: #402dab;
 
     &:after{
-      content: url(down@2x.png);
+      content: url('./down@2x.png');
       vertical-align: middle;
       position: relative;
     }
@@ -63,7 +60,7 @@
   }
 
   .faqs-block__question_titl_rotate:after {
-    content: url(up@2x.png);
+    content: url('./up@2x.png');
   }
   
   .faqs-block__question_answer{

@@ -1,6 +1,6 @@
 /* Переменные */
-$background_bg1: url(bgbut1.png) no-repeat top center;
-$background_bg2: url(bgbut2.png) no-repeat top center;
+$background_bg1: url('./bgbut1.png') no-repeat top center;
+$background_bg2: url('./bgbut2.png') no-repeat top center;
 
 /* mixin */
 @mixin sites__button_top_first($radius) {

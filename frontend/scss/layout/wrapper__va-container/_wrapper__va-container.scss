@@ -316,7 +316,7 @@ button.va-form__button {
     }
     
     &:after {
-      content: url(right@2x.png);
+      content: url('./right@2x.png');
       vertical-align: middle;
       position: relative;
       padding: 0 8px;
