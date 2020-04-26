@@ -8,7 +8,7 @@
   @extend %font_part;
 }
 
-%width_block{
+%width_block {
   @media (max-width: 767px) {
     width: 300px;
   }

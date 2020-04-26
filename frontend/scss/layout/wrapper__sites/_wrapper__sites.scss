@@ -1,27 +1,27 @@
-/* Переменные */
+/* var */
 $background_bg1: url('./bgbut1.png') no-repeat top center;
 $background_bg2: url('./bgbut2.png') no-repeat top center;
 
 /* mixin */
-@mixin sites__button_top_first($radius) {
+@mixin border-top-left($radius) {
   -moz-border-radius-topleft: $radius;
   -webkit-border-top-left-radius: $radius;
   border-top-left-radius: $radius;
 }
 
-@mixin sites__button_top_second($radius) {
+@mixin border-top-right($radius) {
   -moz-border-radius-topright: $radius;
   -webkit-border-top-right-radius: $radius;
   border-top-right-radius: $radius;
 }
 
-@mixin sites__button_bottom_first($radius){
+@mixin border-bottom-left($radius) {
   -moz-border-radius-bottomleft: $radius;
   -webkit-border-bottom-left-radius: $radius;
   border-bottom-left-radius: $radius;
 }
 
-@mixin sites__button_bottom_second($radius){
+@mixin border-bottom-right($radius) {
   -moz-border-radius-bottomright: $radius;
   -webkit-border-bottom-right-radius: $radius;
   border-bottom-right-radius: $radius;
@@ -38,10 +38,10 @@ $background_bg2: url('./bgbut2.png') no-repeat top center;
 
   .sites__button_100 {
     background: $background_bg1;
-    @include sites__button_top_first($border-radius);
-    @include sites__button_top_second($border-radius);
-    @include sites__button_bottom_first($border-radius);
-    @include sites__button_bottom_second($border-radius);
+    @include border-top-left($border-radius);
+    @include border-top-right($border-radius);
+    @include border-bottom-left($border-radius);
+    @include border-bottom-right($border-radius);
   }
 
   .sites__button, .sites__button_100 {
@@ -76,18 +76,18 @@ $background_bg2: url('./bgbut2.png') no-repeat top center;
     }
 
     .sites__button:nth-child(1) {
-      @include sites__button_top_first($border-radius);
-      @include sites__button_top_second($border-radius);
+      @include border-top-left($border-radius);
+      @include border-top-right($border-radius);
     }
 
     .sites__button:not(.sites__button_empty):nth-last-child(2) {
-      @include sites__button_bottom_first($border-radius);
-      @include sites__button_bottom_second($border-radius);
+      @include border-bottom-left($border-radius);
+      @include border-bottom-right($border-radius);
     }
 
     .sites__button:nth-last-child(3).sites__button_empty_pre {
-      @include sites__button_bottom_first($border-radius);
-      @include sites__button_bottom_second($border-radius);
+      @include border-bottom-left($border-radius);
+      @include border-bottom-right($border-radius);
     }
 
     .sites__button_empty{
@@ -99,9 +99,11 @@ $background_bg2: url('./bgbut2.png') no-repeat top center;
     .sites__button {
       width: 50%;
     }
+
     .sites__button_100 {
       width: 100%;
     }
+
     .sites__button, .sites__button_100 {
       height: 70px;
       line-height: 70px;
@@ -109,7 +111,7 @@ $background_bg2: url('./bgbut2.png') no-repeat top center;
     }
 
     .sites__button:nth-child(4n-3),
-    .sites__button:nth-child(4n){
+    .sites__button:nth-child(4n) {
       background: $background_bg1;
     }
 
@@ -119,19 +121,19 @@ $background_bg2: url('./bgbut2.png') no-repeat top center;
     }
 
     .sites__button:nth-child(1) {
-      @include sites__button_top_first($border-radius);
+      @include border-top-left($border-radius);
     }
 
     .sites__button:nth-child(2) {
-      @include sites__button_top_second($border-radius);
+      @include border-top-right($border-radius);
     }
 
     .sites__button:nth-last-child(2) {
-      @include sites__button_bottom_second($border-radius);
+      @include border-bottom-right($border-radius);
     }
 
     .sites__button:nth-last-child(3) {
-      @include sites__button_bottom_first($border-radius);
+      @include border-bottom-left($border-radius);
     }
   }
 }

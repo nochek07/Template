@@ -1,8 +1,8 @@
 
-body{
+body {
   min-width: 320px;
   height: 100%;
-  overflow:scroll;
+  overflow: scroll;
 
   @media (max-width: 640px) {
     background: url('./background@2x.jpg') no-repeat top center fixed;
@@ -17,12 +17,12 @@ body{
   }
 }
 
-.page{
+.page {
   height:100%;
   display: table;
   width:100%;
 
-  .page__inner{
+  .page__inner {
     display: table-row;
     height: 100%;
   }

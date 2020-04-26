@@ -1,10 +1,10 @@
 const webpack = require('webpack');
 const path    = require('path');
 
-const ExtractTextPlugin       = require("extract-text-webpack-plugin");
-const HtmlWebpackPlugin       = require("html-webpack-plugin");
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin          = require('uglifyjs-webpack-plugin');
+const extractTextPlugin       = require("extract-text-webpack-plugin");
+const htmlWebpackPlugin       = require("html-webpack-plugin");
+const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const uglifyJsPlugin          = require('uglifyjs-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'dev';
 
@@ -38,7 +38,7 @@ module.exports = {
             {
                 test: /\.(sass|scss)/,
                 exclude: /node_modules|\.git/,
-                use: ExtractTextPlugin.extract({
+                use: extractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
                         {
@@ -88,14 +88,14 @@ module.exports = {
             LANG: JSON.stringify('ru')
         }),
         new webpack.NoEmitOnErrorsPlugin(),
-        new ExtractTextPlugin('css/style.css'),
-        new HtmlWebpackPlugin({
+        new extractTextPlugin('css/style.css'),
+        new htmlWebpackPlugin({
             filename: __dirname + '/public/index.php',
             title: 'Главная страница',
             template: __dirname + '/frontend/index.php',
             favicon: __dirname + '/frontend/favicon.ico'
         }),
-        new HtmlWebpackPlugin({
+        new htmlWebpackPlugin({
             filename: __dirname + '/public/faq.php',
             title: 'FAQ',
             template: __dirname + '/frontend/faq.php',
@@ -111,7 +111,7 @@ module.exports = {
 
 if (NODE_ENV === 'prod') {
     module.exports.plugins.push(
-        new UglifyJsPlugin({
+        new uglifyJsPlugin({
             uglifyOptions: {
                 warnings: false,
                 compress: {
@@ -123,7 +123,7 @@ if (NODE_ENV === 'prod') {
     );
 
     module.exports.plugins.push(
-        new OptimizeCssAssetsPlugin({
+        new optimizeCssAssetsPlugin({
             assetNameRegExp: /\.css$/,
             cssProcessor: require('cssnano'),
             cssProcessorOptions: {

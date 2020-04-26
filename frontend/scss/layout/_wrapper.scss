@@ -1,7 +1,7 @@
-/* Переменные */
+/* var */
 $border-radius: 10px;
 
-.wrapper{
+.wrapper {
   .wrapper__inner {
     margin: 0 auto;
     @extend %width_block;

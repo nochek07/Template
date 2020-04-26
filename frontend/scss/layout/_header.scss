@@ -1,4 +1,4 @@
-.header{
+.header {
   $header_height_mobile: 130px;
   $header_height_desktop: 200px;
 
@@ -20,9 +20,9 @@
     (max-width: 767px) and (min--moz-device-pixel-ratio: 1.5),
     (max-width: 767px) and (-o-min-device-pixel-ratio: 3/2),
     (max-width: 767px) and (min-resolution: 1.5dppx),
-    (max-width: 767px) and (min-resolution: 144dpi)  {
-        background-image: url('./istranet-logo-img@2x.png');
-        background-size: $logo_width $logo_height;
+    (max-width: 767px) and (min-resolution: 144dpi) {
+      background-image: url('./istranet-logo-img@2x.png');
+      background-size: $logo_width $logo_height;
     }
 
     $logo_height_2: 89px;
@@ -38,7 +38,7 @@
     (min-width: 768px) and (min--moz-device-pixel-ratio: 1.5),
     (min-width: 768px) and (-o-min-device-pixel-ratio: 3/2),
     (min-width: 768px) and (min-resolution: 1.5dppx),
-    (min-width: 768px) and (min-resolution: 144dpi)  {
+    (min-width: 768px) and (min-resolution: 144dpi) {
       background-image: url('./istranet-logo-img2@2x.png');
       background-size: $logo_width_2 $logo_height_2;
     }
