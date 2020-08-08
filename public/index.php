@@ -25,7 +25,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="x-rim-auto-match" content="none">
     <title>Title</title>
-<link rel="shortcut icon" href="/bundles/hs/themes/istra/assets/favicon.ico"><link href="/bundles/hs/themes/istra/assets/css/style.css" rel="stylesheet"></head>
+<link rel="icon" href="/bundles/hs/themes/istra/assets/favicon.ico"><link href="/bundles/hs/themes/istra/assets/css/style.css" rel="stylesheet"></head>
 <body>
     <div class="page">
         <div class="page__inner">
@@ -283,5 +283,5 @@
             error_timer: 'Время закончилось. Вы будите перенапрвлены на начальную страницу!'
         };
     </script>
-<script type="text/javascript" src="/bundles/hs/themes/istra/assets/js/main.js"></script></body>
+<script src="/bundles/hs/themes/istra/assets/js/main.js"></script></body>
 </html>

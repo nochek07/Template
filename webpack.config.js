@@ -1,22 +1,20 @@
 const webpack = require('webpack');
 const path    = require('path');
 
-const extractTextPlugin       = require("extract-text-webpack-plugin");
+const miniCssTextPlugin       = require("mini-css-extract-plugin");
 const htmlWebpackPlugin       = require("html-webpack-plugin");
 const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const uglifyJsPlugin          = require('uglifyjs-webpack-plugin');
+const terserPlugin            = require('terser-webpack-plugin');
 
-const NODE_ENV = process.env.NODE_ENV || 'dev';
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 let publicPath = '/assets';
-if (NODE_ENV === 'prod') {
+if (NODE_ENV === 'production') {
     publicPath = '/bundles/hs/themes/istra/assets';
 }
 
-//process.noDeprecation = true;
-//process.traceDeprecation = true;
-
-module.exports = {
+const config = {
+    mode: NODE_ENV,
     context: __dirname + '/frontend',
     entry: [
         './app.js',
@@ -28,9 +26,19 @@ module.exports = {
         filename: 'js/[name].js'
     },
 
-    //watch: (NODE_ENV === 'dev'),
+    //watch: (NODE_ENV === 'development'),
     watchOptions: {
         aggregateTimeout: 100
+    },
+
+    optimization: {
+        noEmitOnErrors: true,
+        minimize: true,
+        minimizer: []
+    },
+
+    performance: {
+        hints: false
     },
     
     module: {
@@ -38,24 +46,20 @@ module.exports = {
             {
                 test: /\.(sass|scss)/,
                 exclude: /node_modules|\.git/,
-                use: extractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader'
-                        }, {
-                            loader: 'resolve-url-loader'
-                        }, {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: true
-                                /*includePaths: [
-                                    path.resolve(__dirname, "frontend/scss/page/")
-                                ]*/
-                            }
+                use: [
+                    {
+                        loader: miniCssTextPlugin.loader
+                    }, {
+                        loader: 'css-loader'
+                    }, {
+                        loader: 'resolve-url-loader'
+                    }, {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
                         }
-                    ]
-                })            
+                    }
+                ]
             }, {
                 test: /\.(png|jpg|gif|ico)$/,
                 use: [
@@ -63,6 +67,7 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             name: 'img/[name].[ext]',
+                            esModule: false,
                             publicPath: publicPath
                         }
                     }
@@ -74,6 +79,7 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             name: 'fonts/[name].[ext]',
+                            esModule: false,
                             publicPath: publicPath
                         }
                     }
@@ -87,50 +93,56 @@ module.exports = {
             NODE_ENV: JSON.stringify(NODE_ENV),
             LANG: JSON.stringify('ru')
         }),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new extractTextPlugin('css/style.css'),
+        new miniCssTextPlugin({
+            filename: 'css/style.css'
+        }),
         new htmlWebpackPlugin({
             filename: __dirname + '/public/index.php',
             title: 'Главная страница',
             template: __dirname + '/frontend/index.php',
-            favicon: __dirname + '/frontend/favicon.ico'
+            favicon: __dirname + '/frontend/favicon.ico',
+            minify: false
         }),
         new htmlWebpackPlugin({
             filename: __dirname + '/public/faq.php',
             title: 'FAQ',
             template: __dirname + '/frontend/faq.php',
-            inject: false
+            inject: false,
+            minify: false
         }),
         new webpack.ProvidePlugin({
             $: 'jquery/dist/jquery.min.js',
             jQuery: 'jquery/dist/jquery.min.js',
             "window.jQuery": 'jquery/dist/jquery.min.js'
-        })
+        }),
     ]
 };
 
-if (NODE_ENV === 'prod') {
-    module.exports.plugins.push(
-        new uglifyJsPlugin({
-            uglifyOptions: {
-                warnings: false,
-                compress: {
-                    drop_console: true,
-                    unsafe: true
+if (NODE_ENV === 'production') {
+    config.optimization.minimizer =
+        [
+            new terserPlugin({
+                terserOptions: {
+                    warnings: false,
+                    compress: {
+                        drop_console: true,
+                        unsafe: true
+                    }
                 }
-            }
-        })
-    );
+            })
+        ];
 
-    module.exports.plugins.push(
+    config.plugins.push(
         new optimizeCssAssetsPlugin({
             assetNameRegExp: /\.css$/,
             cssProcessor: require('cssnano'),
             cssProcessorOptions: {
-                autoprefixer: false,
+                autoprefixer: true,
                 discardComments: {removeAll: true }
             },
             canPrint: true
         })
     );
 }
+
+module.exports = config;
