@@ -17,11 +17,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=10; IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=11; IE=edge">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="expires" content="-1">
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="x-rim-auto-match" content="none">
     <title>Title</title>

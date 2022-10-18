@@ -1,10 +1,12 @@
-const webpack = require('webpack');
-const path    = require('path');
+const {DefinePlugin} = require('webpack');
+const {NoEmitOnErrorsPlugin} = require('webpack');
+const {ProvidePlugin} = require('webpack');
+const path = require('path');
 
-const miniCssTextPlugin       = require("mini-css-extract-plugin");
-const htmlWebpackPlugin       = require("html-webpack-plugin");
-const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const terserPlugin            = require('terser-webpack-plugin');
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const cssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const terserPlugin = require('terser-webpack-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -13,15 +15,17 @@ if (NODE_ENV === 'production') {
     publicPath = '/bundles/hs/themes/istra/assets';
 }
 
-const config = {
+// process.noDeprecation = true;
+// process.traceDeprecation = true;
+
+module.exports = {
     mode: NODE_ENV,
-    context: __dirname + '/frontend',
     entry: [
-        './app.js',
-        './scss/main.scss'
+        './frontend/app.js',
+        './frontend/scss/main.scss',
     ],
     output: {
-        path: path.resolve(__dirname, 'public/assets'),
+        path: path.resolve(__dirname, 'public/assets/'),
         publicPath: publicPath,
         filename: 'js/[name].js'
     },
@@ -31,118 +35,96 @@ const config = {
         aggregateTimeout: 100
     },
 
-    optimization: {
-        noEmitOnErrors: true,
-        minimize: true,
-        minimizer: []
-    },
-
-    performance: {
-        hints: false
-    },
-    
     module: {
         rules: [
             {
                 test: /\.(sass|scss)/,
                 exclude: /node_modules|\.git/,
                 use: [
+                    miniCssExtractPlugin.loader,
                     {
-                        loader: miniCssTextPlugin.loader
+                        loader: 'css-loader',
+                        options: {
+                            esModule: false
+                        },
                     }, {
-                        loader: 'css-loader'
-                    }, {
-                        loader: 'resolve-url-loader'
+                        loader: 'resolve-url-loader',
                     }, {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: true
+                            sourceMap: true,
                         }
                     }
                 ]
             }, {
-                test: /\.(png|jpg|gif|ico)$/,
+                test: /\.(ttf|eot|woff|svg)$/,
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
-                            name: 'img/[name].[ext]',
-                            esModule: false,
-                            publicPath: publicPath
+                            name: '[folder]/[name].[ext]',
+                            publicPath: publicPath,
                         }
                     }
                 ]
             }, {
-                test: /\.(ttf|eot|woff)$/,
+                test: /\.(png|jpg|jpeg|gif|ico)$/,
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
-                            name: 'fonts/[name].[ext]',
+                            name: '[name].[ext]',
+                            publicPath: publicPath + '/images/',
+                            outputPath: 'images/',
                             esModule: false,
-                            publicPath: publicPath
                         }
                     }
                 ]
             }
         ]
     },
-    
+
     plugins: [
-        new webpack.DefinePlugin({
-            NODE_ENV: JSON.stringify(NODE_ENV),
+        new DefinePlugin({
+            NODE_ENV: JSON.stringify(process.env.NODE_ENV),
             LANG: JSON.stringify('ru')
         }),
-        new miniCssTextPlugin({
-            filename: 'css/style.css'
+        new NoEmitOnErrorsPlugin(),
+        require('autoprefixer'),
+        new miniCssExtractPlugin({
+            filename: "css/style.css",
         }),
         new htmlWebpackPlugin({
             filename: __dirname + '/public/index.php',
             title: 'Главная страница',
             template: __dirname + '/frontend/index.php',
-            favicon: __dirname + '/frontend/favicon.ico',
-            minify: false
+            favicon: __dirname + '/frontend/favicon.ico'
         }),
         new htmlWebpackPlugin({
             filename: __dirname + '/public/faq.php',
             title: 'FAQ',
             template: __dirname + '/frontend/faq.php',
-            inject: false,
-            minify: false
+            inject: false
         }),
-        new webpack.ProvidePlugin({
+        new ProvidePlugin({
             $: 'jquery/dist/jquery.min.js',
             jQuery: 'jquery/dist/jquery.min.js',
-            "window.jQuery": 'jquery/dist/jquery.min.js'
-        }),
-    ]
-};
-
-if (NODE_ENV === 'production') {
-    config.optimization.minimizer =
-        [
-            new terserPlugin({
-                terserOptions: {
-                    warnings: false,
-                    compress: {
-                        drop_console: true,
-                        unsafe: true
-                    }
-                }
-            })
-        ];
-
-    config.plugins.push(
-        new optimizeCssAssetsPlugin({
-            assetNameRegExp: /\.css$/,
-            cssProcessor: require('cssnano'),
-            cssProcessorOptions: {
-                autoprefixer: true,
-                discardComments: {removeAll: true }
-            },
-            canPrint: true
+            'window.jQuery': 'jquery/dist/jquery.min.js'
         })
-    );
-}
+    ],
 
-module.exports = config;
+    performance: {
+        hints: false
+    },
+
+    optimization: {
+        emitOnErrors: true,
+        minimize: (NODE_ENV === 'production'),
+        minimizer: [].concat(NODE_ENV === 'production' ? [
+            new terserPlugin({
+                extractComments: false,
+            }),
+            new cssMinimizerPlugin(),
+        ] : [])
+    }
+}
