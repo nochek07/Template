@@ -20,14 +20,10 @@ require('fancybox/dist/js/jquery.fancybox.pack.js');
         init: function (params) {
             if (this.length) {
                 return this.each(function () {
-                    //Параметры
                     methods.options = $.extend({}, methods.options, params);
 
                     methods.selectSlice(this);
-
-                    methods.initBindButton(this, 'sms', 'smspass');
-                    methods.initBindButton(this, 'smspass', 'sms');
-                    
+                    methods.initBindObject(this);
                     methods.formSubmit(this);
 
                     if (methods.options.form === 'form-asterisk') {
@@ -52,6 +48,7 @@ require('fancybox/dist/js/jquery.fancybox.pack.js');
                         });
                     }
 
+                    $('.va-form__label_checkbox', this).parent('.va-form__block').hide();
                 });
             }
         },
@@ -73,19 +70,22 @@ require('fancybox/dist/js/jquery.fancybox.pack.js');
                 $('.va-slice-' + methods.options.slice + ' .va-slice__content', obj).show(100);
             }
         },
-        initBindButton: function (obj, source, receiver) {
-            let form = $('#form-' + source, obj),
-                slice = $("input[name='" + source + "_form[slice]']", form).val();
-
-            let param = {
-                receiver: receiver,
-                slice: slice
-            };
-
-            $('.va-form__button', form).bind('click.slices', param, methods.clickButton);
+        initBindObject: function (obj) {
+            let slices = $(".va-form__button", obj);
+            slices.each(function () {
+                let parent = $(this).parents('.va-slice'),
+                    form = $(this).data('form');
+                if (form !== undefined) {
+                    let param = {
+                        form: form,
+                        slice: $("input[name$='[slice]']", parent).val()
+                    };
+                    $(this).bind('click.slices', param, methods.clickObject);
+                }
+            });
         },
-        clickButton: function (eventObject) {
-            window.location.href = '?form=form-' + eventObject.data.receiver + '&slice=' + eventObject.data.slice;
+        clickObject: function (eventObject) {
+            window.location.href = '?form=form-' + eventObject.data.form + '&slice=' + eventObject.data.slice;
             return true;
         },
         formSubmit: function (obj) {

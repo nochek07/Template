@@ -15,9 +15,6 @@ if (NODE_ENV === 'production') {
     publicPath = '/bundles/hs/themes/istra/assets';
 }
 
-// process.noDeprecation = true;
-// process.traceDeprecation = true;
-
 module.exports = {
     mode: NODE_ENV,
     entry: [
@@ -30,7 +27,7 @@ module.exports = {
         filename: 'js/[name].js'
     },
 
-    //watch: (NODE_ENV === 'development'),
+    watch: (NODE_ENV === 'development'),
     watchOptions: {
         aggregateTimeout: 100
     },
@@ -57,7 +54,7 @@ module.exports = {
                     }
                 ]
             }, {
-                test: /\.(ttf|eot|woff|svg)$/,
+                test: /\.(ttf|eot|woff|woff2)$/,
                 use: [
                     {
                         loader: 'file-loader',
@@ -68,7 +65,7 @@ module.exports = {
                     }
                 ]
             }, {
-                test: /\.(png|jpg|jpeg|gif|ico)$/,
+                test: /\.(png|jpg|jpeg|gif|ico|svg)$/,
                 use: [
                     {
                         loader: 'file-loader',

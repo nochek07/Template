@@ -12,8 +12,13 @@ body {
     background: url('./background@3x.jpg') no-repeat top center fixed;
   }
 
-  @media (min-width: 961px) {
+  @media (min-width: 961px) and (max-width: 1920px) {
     background: url('./background-large.jpg') no-repeat top center fixed;
+  }
+
+  @media (min-width: 1921px) {
+    background: url('./background-large.jpg') no-repeat top center fixed;
+    background-size: cover;
   }
 }
 

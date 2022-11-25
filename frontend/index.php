@@ -1,6 +1,12 @@
 <?php
-    if (isset($_POST['submit'])) {
-        header("Location: ?form={$_POST['form']}&slice={$_POST['slice']}");
+    foreach ($_POST as $key => $item) {
+        if (is_array($item)) {
+            if (isset($item['submit'])) {
+                $nameForm = str_replace('_form', '', $key);
+                header("Location: ?form=form-{$nameForm}&slice={$item['slice']}");
+                break;
+            }
+        }
     }
 
     $slice = $_GET['slice'] ?? 0;
@@ -37,207 +43,234 @@
                 <div class="wrapper__inner wrapper__va-container">
 
                     <?php if ($autologin): ?>
-                    <div class="va-container autologin">
-                        <div class="va-container__inner">
+                        <div class="va-container autologin">
+                            <div class="va-container__inner">
 
-                            <div class="autologin__title">
-                                <div class="autologin__title_inner">
-                                    <img src="<%= require('./scss/layout/wrapper__va-container/wireless-internet-img.png') %>"
-                                         srcset="<%= require('./scss/layout/wrapper__va-container/wireless-internet-img@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/wireless-internet-img@3x.png') %> 3x">
-                                    <div class="autologin-block-number">
-                                        <div class="autologin-block-number__text">Ваш номер</div>
-                                        <div class="autologin-block-number__number">+7 (927) 688-33-40?</div>
+                                <div class="autologin__title">
+                                    <div class="autologin__title_inner">
+                                        <img src="<%= require('./scss/layout/wrapper__va-container/wireless-internet-img.png') %>"
+                                             srcset="<%= require('./scss/layout/wrapper__va-container/wireless-internet-img@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/wireless-internet-img@3x.png') %> 3x">
+                                        <div class="autologin-block-number">
+                                            <div class="autologin-block-number__text">Ваш номер</div>
+                                            <div class="autologin-block-number__number">+7 (927) 688-33-40?</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="autologin__content">
-                                <div class="autologin__content_block">
-                                    <button type="button" class="va-form__submit" data-tel="79276883340">
-                                        <img src="<%= require('./scss/layout/wrapper__va-container/login.png') %>"
-                                             srcset="<%= require('./scss/layout/wrapper__va-container/login@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/login@3x.png') %> 3x">
-                                        <span>Войти в интернет</span>
-                                    </button>
+                                <div class="autologin__content">
+                                    <div class="autologin__content_block">
+                                        <button type="button" class="va-form__submit" data-tel="79276883340">
+                                            <img src="<%= require('./scss/layout/wrapper__va-container/login.png') %>"
+                                                 srcset="<%= require('./scss/layout/wrapper__va-container/login@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/login@3x.png') %> 3x">
+                                            <span>Войти в интернет</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="autologin__content_block autologin-enter">
+                                        <a href="/">Другие способы входа</a>
+                                    </div>
                                 </div>
 
-                                <div class="autologin__content_block autologin-enter">
-                                    <a href="/">Другие способы входа</a>
-                                </div>
                             </div>
-                            
                         </div>
-                    </div>
                     <?php endif; ?>
 
                     <?php if (!$autologin): ?>
 
-                    <?php if ($error == 1 || $warning == 1): ?>
-                    <div class="block-container">
-                        <?php if ($error == 1): ?>
-                        <div class="block-container__inner block-container__error">
-                            Ошибка
-                        </div>
+                        <?php if ($error == 1 || $warning == 1): ?>
+                            <div class="block-container">
+                                <?php if ($error == 1): ?>
+                                    <div class="block-container__inner block-container__error">
+                                        Ошибка
+                                    </div>
+                                <?php else: ?>
+                                    <div class="block-container__inner block-container__warning">
+                                        Предупреждение
+                                    </div>
+                                <?php endif; ?>
+                            </div>
                         <?php endif; ?>
 
-                        <?php if ($warning == 1): ?>
-                        <div class="block-container__inner block-container__warning">
-                            Предупреждение
+                        <div class="text-container">Выберите способ авторизации</div>
+
+                        <div class="va-container">
+                            <div class="va-container__inner">
+
+                                <!--Asterisk-->
+                                <div class="va-slice va-slice-1 va-container__inner_slice-first">
+                                    <div class="va-slice__title">
+                                        <div class="va-slice__title_inner">
+                                            <img src="<%= require('./scss/layout/wrapper__va-container/bell.png') %>"
+                                                 srcset="<%= require('./scss/layout/wrapper__va-container/bell@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/bell@3x.png') %> 3x">
+                                            По звонку
+                                        </div>
+                                    </div>
+                                    <div class="va-slice__content">
+                                        <?php if ($form === 'form-asterisk'): ?>
+                                            <div class="timer">
+                                                <p>ЗВОНИ НА НОМЕР <span class="timer__phone"></span> И БУДЕТ ТЕБЕ ИНТЕРНЕТ</p>
+                                                <a href="tel:84983164444">8(498)316-44-44</a>
+                                                <p>В течении <span class="timer__time"></span> с возможно позвонить!</p>
+                                            </div>
+                                        <?php else: ?>
+                                            <form id="form-asterisk" name="asterisk_form" method="post" class="va-form">
+                                                <div class="va-form__block">
+                                                    <label class="va-form__label">Укажите ваш номер телефона
+                                                        <input type="text" class="va-form__input" name="asterisk_form[phone]" placeholder="89161234567" value="">
+                                                    </label>
+                                                </div>
+                                                <div class="va-form__block">
+                                                    <input type="hidden" name="asterisk_form[slice]" value="1">
+
+                                                    <button type="submit" class="va-form__submit" name="asterisk_form[submit]">
+                                                        <img src="<%= require('./scss/layout/wrapper__va-container/bell-small.png') %>"
+                                                             srcset="<%= require('./scss/layout/wrapper__va-container/bell-small@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/bell-small@3x.png') %> 3x">
+                                                        <span>Авторизация</span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                                <!--SocialNetwork-->
+                                <div class="va-slice va-slice-2 va-container__inner_slice-next">
+                                    <div class="va-slice__title">
+                                        <div class="va-slice__title_inner">
+                                            <img src="<%= require('./scss/layout/wrapper__va-container/vk.png') %>"
+                                                 srcset="<%= require('./scss/layout/wrapper__va-container/vk@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/vk@3x.png') %> 3x">
+                                            Через соц. сети
+                                        </div>
+                                    </div>
+                                    <div class="va-slice__content">
+                                    </div>
+                                </div>
+
+                                <!--SMS-->
+                                <div class="va-slice va-slice-3 va-container__inner_slice-next">
+                                    <div class="va-slice__title">
+                                        <div class="va-slice__title_inner">
+                                            <img src="<%= require('./scss/layout/wrapper__va-container/sms.png') %>"
+                                                 srcset="<%= require('./scss/layout/wrapper__va-container/sms@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/sms@3x.png') %> 3x">
+                                            По СМС
+                                        </div>
+                                    </div>
+                                    <div class="va-slice__content">
+                                        <?php if ($form === 'form-smspass'): ?>
+                                            <form id="form-smspass" name="smspass_form" method="post" class="va-form">
+                                                <div class="va-form__block">
+                                                    <label class="va-form__label">Введите полученный пароль
+                                                        <input type="password" class="va-form__input" name="smspass_form[password]" placeholder="пароль" value="">
+                                                    </label>
+                                                </div>
+                                                <div class="va-form__block">
+                                                    <input type="hidden" name="smspass_form[slice]" value="3">
+
+                                                    <button type="submit" class="va-form__submit" name="smspass_form[submit]">
+                                                        <img src="<%= require('./scss/layout/wrapper__va-container/sms-small.png') %>"
+                                                             srcset="<%= require('./scss/layout/wrapper__va-container/sms-small@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/sms-small@3x.png') %> 3x">
+                                                        <span>Авторизация</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="va-form__block">
+                                                    <button type="button" class="va-form__button" data-form="sms">
+                                                        <span>Получить пароль</span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        <?php else: ?>
+                                            <form id="form-sms" name="sms_form" method="post" class="va-form">
+                                                <div class="va-form__block">
+                                                    <label class="va-form__label">Укажите ваш номер телефона
+                                                        <input type="text" class="va-form__input" name="sms_form[phone]" placeholder="89161234567" value="">
+                                                    </label>
+                                                </div>
+                                                <div class="va-form__block">
+                                                    <input type="hidden" name="sms_form[slice]" value="3">
+
+                                                    <button type="submit" class="va-form__submit" name="sms_form[submit]">
+                                                        <img src="<%= require('./scss/layout/wrapper__va-container/sms-small.png') %>"
+                                                             srcset="<%= require('./scss/layout/wrapper__va-container/sms-small@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/sms-small@3x.png') %> 3x">
+                                                        <span>Авторизация</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="va-form__block">
+                                                    <button type="button" class="va-form__button" data-form="smspass">
+                                                        <span>Ввести пароль</span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                                <!--Reseption-->
+                                <div class="va-slice va-slice-4 va-container__inner_slice-next">
+                                    <div class="va-slice__title">
+                                        <div class="va-slice__title_inner">
+                                            <img src="<%= require('./scss/layout/wrapper__va-container/istra.png') %>"
+                                                 srcset="<%= require('./scss/layout/wrapper__va-container/istra@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/istra@3x.png') %> 3x">
+                                            У администратора
+                                        </div>
+                                    </div>
+                                    <div class="va-slice__content">
+                                        <form id="form-reseption" name="reseption_form" method="post" class="va-form">
+                                            <div class="va-form__block">
+                                                <label class="va-form__label">Укажите ваш номер телефона
+                                                    <input type="text" class="va-form__input" name="reseption_form[phone]" placeholder="89123456789" value="">
+                                                </label>
+                                            </div>
+                                            <div class="va-form__block">
+                                                <input type="password" class="va-form__input" name="reseption_form[password]" placeholder="пароль" value="">
+                                            </div>
+                                            <div class="va-form__block">
+                                                <input type="hidden" name="reseption_form[slice]" value="4">
+
+                                                <button type="submit" class="va-form__submit" name="reseption_form[submit]">
+                                                    <img src="<%= require('./scss/layout/wrapper__va-container/login.png') %>"
+                                                         srcset="<%= require('./scss/layout/wrapper__va-container/login@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/login@3x.png') %> 3x">
+                                                    <span>Авторизация</span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                                <!--ISTRANET.RU-->
+                                <div class="va-slice va-slice-5 va-container__inner_slice-next">
+                                    <div class="va-slice__title">
+                                        <div class="va-slice__title_inner">
+                                            <img src="<%= require('./scss/layout/wrapper__va-container/istra.png') %>"
+                                                 srcset="<%= require('./scss/layout/wrapper__va-container/istra@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/istra@3x.png') %> 3x">
+                                            Логин ISTRANET.RU
+                                        </div>
+                                    </div>
+                                    <div class="va-slice__content">
+                                        <form id="form-istranet" name="istranet_form" method="post" class="va-form">
+                                            <div class="va-form__block">
+                                                <label class="va-form__label">Введите логин и пароль istranet.ru
+                                                    <input type="text" class="va-form__input" name="istranet_form[login]" placeholder="логин" value="">
+                                                </label>
+                                            </div>
+                                            <div class="va-form__block">
+                                                <input type="password" class="va-form__input" name="istranet_form[password]" placeholder="пароль" value="">
+                                            </div>
+                                            <div class="va-form__block">
+                                                <input type="hidden" name="istranet_form[slice]" value="5">
+
+                                                <button type="submit" class="va-form__submit" name="istranet_form[submit]">
+                                                    <img src="<%= require('./scss/layout/wrapper__va-container/login.png') %>"
+                                                         srcset="<%= require('./scss/layout/wrapper__va-container/login@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/login@3x.png') %> 3x">
+                                                    <span>Авторизация</span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <?php endif; ?>
-                    </div>
-                    <?php endif; ?>
-                    
-                    <div class="text-container">Выберите способ авторизации</div>
-
-                    <div class="va-container">
-                        <div class="va-container__inner">
-
-                            <!--Asterisk-->
-                            <div class="va-slice va-slice-1 va-container__inner_slice-first">
-                                <div class="va-slice__title">
-                                    <div class="va-slice__title_inner">
-                                        <img src="<%= require('./scss/layout/wrapper__va-container/bell.png') %>"
-                                             srcset="<%= require('./scss/layout/wrapper__va-container/bell@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/bell@3x.png') %> 3x">
-                                        По звонку
-                                    </div>
-                                </div>
-                                <div class="va-slice__content">
-                                    <?php if ($form === 'form-phone'): ?>
-                                        <div class="timer">
-                                            <p>ЗВОНИ НА НОМЕР <span class="timer__phone"></span> И БУДЕТ ТЕБЕ ИНТЕРНЕТ</p>
-                                            <a href="tel:84983164444">8(498)316-44-44</a>
-                                            <p>Втечении <span class="timer__time"></span> с возможно позвонить!</p>
-                                        </div>
-                                    <?php else: ?>
-                                    <form id="form-phone" method="post" class="va-form">
-                                        <div class="va-form__block">
-                                            <label class="va-form__label">Укажите ваш номер телефона
-                                                <input type="text" class="va-form__input" name="phone" placeholder="89161234567" value="">
-                                            </label>
-                                        </div>
-                                        <div class="va-form__block">
-                                            <input type="hidden" name="form" value="form-phone">
-                                            <input type="hidden" name="slice" value="1">
-
-                                            <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="<%= require('./scss/layout/wrapper__va-container/bell-small.png') %>"
-                                                     srcset="<%= require('./scss/layout/wrapper__va-container/bell-small@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/bell-small@3x.png') %> 3x">
-                                                <span>Авторизация</span>
-                                            </button>
-                                        </div>
-                                    </form>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-
-                            <!--SocialNetwork-->
-                            <div class="va-slice va-slice-2 va-container__inner_slice-next">
-                                <div class="va-slice__title">
-                                    <div class="va-slice__title_inner">
-                                        <img src="<%= require('./scss/layout/wrapper__va-container/vk.png') %>"
-                                             srcset="<%= require('./scss/layout/wrapper__va-container/vk@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/vk@3x.png') %> 3x">
-                                        Через соц. сети
-                                    </div>
-                                </div>
-                                <div class="va-slice__content">
-                                </div>
-                            </div>
-
-                            <!--SMS-->
-                            <div class="va-slice va-slice-3 va-container__inner_slice-next">
-                                <div class="va-slice__title">
-                                    <div class="va-slice__title_inner">
-                                        <img src="<%= require('./scss/layout/wrapper__va-container/sms.png') %>"
-                                             srcset="<%= require('./scss/layout/wrapper__va-container/sms@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/sms@3x.png') %> 3x">
-                                        По СМС
-                                    </div>
-                                </div>
-                                <div class="va-slice__content">
-                                    <?php if ($form === 'form-pass'): ?>
-                                    <form id="form-pass" method="post" class="va-form">
-                                        <div class="va-form__block">
-                                            <label class="va-form__label">Введите полученный пароль
-                                                <input type="password" class="va-form__input" name="password" placeholder="пароль" value="">
-                                            </label>
-                                        </div>
-                                        <div class="va-form__block">
-                                            <input type="hidden" name="form" value="form-pass">
-                                            <input type="hidden" name="slice" value="3">
-
-                                            <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="<%= require('./scss/layout/wrapper__va-container/sms-small.png') %>"
-                                                     srcset="<%= require('./scss/layout/wrapper__va-container/sms-small@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/sms-small@3x.png') %> 3x">
-                                                <span>Авторизация</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="va-form__block">
-                                            <button type="button" class="va-form__button">
-                                                <span>Получить пароль</span>
-                                            </button>
-                                        </div>
-                                    </form>
-                                    <?php else: ?>
-                                    <form id="form-sms" method="post" class="va-form">
-                                        <div class="va-form__block">
-                                            <label class="va-form__label">Укажите ваш номер телефона
-                                                <input type="text" class="va-form__input" name="phone" placeholder="89161234567" value="">
-                                            </label>
-                                        </div>
-                                        <div class="va-form__block">
-                                            <input type="hidden" name="form" value="form-sms">
-                                            <input type="hidden" name="slice" value="3">
-
-                                            <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="<%= require('./scss/layout/wrapper__va-container/sms-small.png') %>"
-                                                     srcset="<%= require('./scss/layout/wrapper__va-container/sms-small@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/sms-small@3x.png') %> 3x">
-                                                <span>Авторизация</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="va-form__block">
-                                            <button type="button" class="va-form__button">
-                                                <span>Ввести пароль</span>
-                                            </button>
-                                        </div>
-                                    </form>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-
-                            <!--ISTRANET.RU-->
-                            <div class="va-slice va-slice-4 va-container__inner_slice-next">
-                                <div class="va-slice__title">
-                                    <div class="va-slice__title_inner">
-                                        <img src="<%= require('./scss/layout/wrapper__va-container/istra.png') %>"
-                                             srcset="<%= require('./scss/layout/wrapper__va-container/istra@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/istra@3x.png') %> 3x">
-                                        Логин ISTRANET.RU
-                                    </div>
-                                </div>
-                                <div class="va-slice__content">
-                                    <form id="form-istra" method="post" class="va-form">
-                                        <div class="va-form__block">
-                                            <label class="va-form__label">Введите логин и пароль istranet.ru
-                                                <input type="text" class="va-form__input" name="phone" placeholder="логин" value="">
-                                            </label>
-                                        </div>
-                                        <div class="va-form__block">
-                                            <input type="password" class="va-form__input" name="password" placeholder="пароль" value="">
-                                        </div>
-                                        <div class="va-form__block">
-                                            <input type="hidden" name="form" value="form-istra">
-                                            <input type="hidden" name="slice" value="4">
-
-                                            <button type="submit" class="va-form__submit" name="submit">
-                                                <img src="<%= require('./scss/layout/wrapper__va-container/login.png') %>"
-                                                     srcset="<%= require('./scss/layout/wrapper__va-container/login@2x.png') %> 2x, <%= require('./scss/layout/wrapper__va-container/login@3x.png') %> 3x">
-                                                <span>Авторизация</span>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <?php endif; ?>
                 </div>
 
@@ -278,7 +311,7 @@
             time_asterisk_authorization: <?php echo $time_asterisk_authorization; ?>,
             url_asterisk_authorization: '<?php echo $url_asterisk_authorization; ?>',
             url_default: '<?php echo $url_default; ?>',
-            error_timer: 'Время закончилось. Вы будите перенапрвлены на начальную страницу!'
+            error_timer: 'Время закончилось. Вы будите перенаправлены на начальную страницу'
         };
     </script>
 </body>
